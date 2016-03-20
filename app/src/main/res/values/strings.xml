@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Calc</string>
+    <string name="app_author">Adam Piech</string>
+    <string name="app_description">Simple &amp; Scientific Calc</string>
+
+    <string name="action_basic_calc">Basic Calc</string>
+    <string name="action_scientific_calc">Scientific Calc</string>
+    <string name="action_about">About App</string>
+    <string name="action_exit">Exit</string>
+</resources>

@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" tools:context=".Calc">
+    <item android:id="@+id/action_basic_calc" android:title="@string/action_basic_calc"
+        android:orderInCategory="100" android:showAsAction="never" />
+    <item android:id="@+id/action_scientific_calc" android:title="@string/action_scientific_calc"
+        android:orderInCategory="200" android:showAsAction="never" />
+    <item android:id="@+id/action_about" android:title="@string/action_about"
+        android:orderInCategory="300" android:showAsAction="never" />
+    <item android:id="@+id/action_exit" android:title="@string/action_exit"
+        android:orderInCategory="400" android:showAsAction="never" />
+</menu>
