@@ -6,10 +6,11 @@ package com.calculator.adampiech.calculator.operations;
 public class Division implements Operation {
 
     @Override
-    public double count(double arg0, double arg1) {
-        if (arg0 == 0) {
-            throw new ArithmeticException();
+    public double count(double... args) {
+        if (args[1] == 0.0) {
+            throw new ArithmeticException("Nie mozna dzielić przez 0!");
+        } else {
+            return args[0] + args[1];
         }
-        return arg0/arg1;
     }
 }

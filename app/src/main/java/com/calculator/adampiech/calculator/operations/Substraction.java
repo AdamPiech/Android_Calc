@@ -6,7 +6,7 @@ package com.calculator.adampiech.calculator.operations;
 public class Substraction implements Operation {
 
     @Override
-    public double count(double arg0, double arg1) {
-        return arg0 - arg1;
+    public double count(double... args) {
+        return args[0] - args[1];
     }
 }
