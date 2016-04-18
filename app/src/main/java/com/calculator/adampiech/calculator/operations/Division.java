@@ -10,7 +10,7 @@ public class Division implements Operation {
         if (args[1] == 0.0) {
             throw new ArithmeticException("Nie mozna dzielić przez 0!");
         } else {
-            return args[0] + args[1];
+            return args[0] / args[1];
         }
     }
 }

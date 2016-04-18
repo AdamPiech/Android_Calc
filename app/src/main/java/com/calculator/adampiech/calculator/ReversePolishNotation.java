@@ -2,12 +2,20 @@ package com.calculator.adampiech.calculator;
 
 import android.util.Log;
 
+import java.util.Map;
 import java.util.Stack;
 
 /**
  * Created by Adam Piech on 2016-04-10.
  */
 public class ReversePolishNotation {
+
+    private Map<String, OperationArguments> operations;
+
+    public ReversePolishNotation() {
+        OperationExecutor executor = new OperationExecutor();
+        this.operations = executor.getOperations();
+    }
 
     public String stringToRPN(String text) {
 
@@ -19,21 +27,17 @@ public class ReversePolishNotation {
             if (getOperatorPriority(sing) != 0) {
                 while (!stack.empty() && getOperatorPriority(stack.peek()) >= getOperatorPriority(sing)) {
                     result += stack.pop() + " ";
-//                    Log.d("#Znak#", result);
                 }
                 stack.push(sing);
             } else if ("(".equals(sing)) {
                 stack.push(sing);
-//                Log.d("#Nawias Lewy#", result);
             } else if (")".equals(sing)) {
                 while (!"(".equals(stack.peek())) {
                     result += stack.pop() + " ";
                 }
                 stack.pop();
-//                Log.d("#Nawias Prawy#", result);
             } else {
                 result += sing + " ";
-//                Log.d("#Liczba#", result);
             }
         }
 
@@ -41,7 +45,7 @@ public class ReversePolishNotation {
             result += stack.pop() + " ";
         }
 
-        return result;
+        return result.trim();
     }
 
 
@@ -54,35 +58,33 @@ public class ReversePolishNotation {
             if (getOperatorPriority(sing) == 0) {
                 double value = Double.parseDouble(sing);
                 stack.push(value);
-                Log.d("#odlorzono#", sing);
             } else {
-                double firstValue = stack.pop();
-                double secondValue = stack.pop();
-                switch(sing.charAt(0)) {
-                    case '*': {stack.push(secondValue * firstValue); break;}
-                    case '+': {stack.push(secondValue + firstValue); break;}
-                    case '-': {stack.push(secondValue - firstValue); break;}
-                    case '/': {stack.push(secondValue / firstValue); break;}
+                if (operations.get(sing).getHowMuchArgs() == 1) {
+                    double value = stack.pop();
+                    stack.push(operations.get(sing).getOperation().count(value));
+                } else {
+                    double secondValue = stack.pop();
+                    double firstValue = stack.pop();
+                    stack.push(operations.get(sing).getOperation().count(firstValue, secondValue));
                 }
-                Log.d("#OBLICZENIA#", stack.peek().toString());
             }
         }
-        return stack.pop().toString();
+        return stack.pop().toString().trim().replace(".0", "");
     }
 
 
     private int getOperatorPriority(String operator) {
         switch (operator) {
-            case "sin(":
-            case "cos(":
-            case "tan(":
-            case "log(":
-            case "ln(":
+            case "sin":
+            case "cos":
+            case "tan":
+            case "log":
+            case "ln":
             case "!":
             case "%":
                 return 4;
             case "^":
-            case "sqrt(":
+            case "sqrt":
                 return 3;
             case "*":
             case "/":

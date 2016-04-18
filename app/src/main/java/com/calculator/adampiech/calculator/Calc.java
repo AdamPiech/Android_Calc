@@ -54,7 +54,7 @@ public class Calc extends Activity {
     }
 
     private void setText (String text) {
-        if ("0".equals(calcView.getText().toString())) {
+        if ("0".equals(calcView.getText().toString()) || "Infinity".equals(calcView.getText().toString())) {
             calcView.setText("");
         }
         if (!".".equals(text) || dotFlag) {
@@ -136,23 +136,23 @@ public class Calc extends Activity {
     }
 
     public void buttonSINAction(View view) {
-        setText("sin(");
+        setText("sin (");
     }
 
     public void buttonCOSAction(View view) {
-        setText("cos(");
+        setText("cos (");
     }
 
     public void buttonTANAction(View view) {
-        setText("tan(");
+        setText("tan (");
     }
 
     public void buttonLOGAction(View view) {
-        setText("log(");
+        setText("log (");
     }
 
     public void buttonLNAction(View view) {
-        setText("ln(");
+        setText("ln (");
     }
 
     public void buttonLeftBracketAction(View view) {
@@ -201,7 +201,6 @@ public class Calc extends Activity {
 
     public void buttonResultAction(View view) {
         ReversePolishNotation polishNotation = new ReversePolishNotation();
-        Log.d("#########",polishNotation.stringToRPN(calcView.getText().toString()));
         calcView.setText(polishNotation.countRPN(polishNotation.stringToRPN(calcView.getText().toString())));
     }
 
