@@ -10,10 +10,15 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import java.text.NumberFormat;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Calc extends Activity {
 
     private TextView calcView;
+
+    private ReversePolishNotation polishNotation;
+    private Set<String> messages;
     private boolean dotFlag = true;
 
     @Override
@@ -21,6 +26,8 @@ public class Calc extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_basic_calc);
         calcView = (TextView)findViewById(R.id.calcView);
+        polishNotation = new ReversePolishNotation();
+        messages = createMessage();
     }
 
     @Override
@@ -53,18 +60,23 @@ public class Calc extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void setText (String text) {
-        if ("0".equals(calcView.getText().toString()) || "Infinity".equals(calcView.getText().toString())) {
+    private Set<String> createMessage() {
+        Set<String> messages = new HashSet<>();
+        messages.add(" 0 ");
+        messages.add("Infinity");
+        messages.add("Error");
+        return messages;
+    }
+
+    private void setText(String text) {
+        if (messages.contains(calcView.getText().toString())) {
             calcView.setText("");
         }
         if (!".".equals(text) || dotFlag) {
-            if ((calcView.getText().length() <= 30 || !calcView.getText().toString().matches(".*[0-9]+"))
-                    && (text.matches("[0-9]+") || calcView.getText().toString().matches(".*[0-9]+"))) {
-                if (!(text.matches("[0-9\\.]+") && calcView.getText().toString().matches(".*[0-9\\.]+"))) {
-                    calcView.setText(calcView.getText().toString() + " " + text);
-                } else {
-                    calcView.setText(calcView.getText().toString() + text);
-                }
+            if (!(text.matches("[0-9\\.]+") && calcView.getText().toString().matches(".*[0-9\\.]+"))) {
+                calcView.setText(calcView.getText().toString() + " " + text);
+            } else {
+                calcView.setText(calcView.getText().toString() + text);
             }
         }
         if (".".equals(text)) {
@@ -76,132 +88,213 @@ public class Calc extends Activity {
     }
 
     public void buttonOneAction(View view) {
-        setText("1");
+        if (canWriteNumber(calcView.getText().toString())) {
+            setText("1");
+        }
     }
 
     public void buttonTwoAction(View view) {
-        setText("2");
+        if (canWriteNumber(calcView.getText().toString())) {
+            setText("2");
+        }
     }
 
     public void buttonThreeAction(View view) {
-        setText("3");
+        if (canWriteNumber(calcView.getText().toString())) {
+            setText("3");
+        }
     }
 
     public void buttonFourAction(View view) {
-        setText("4");
+        if (canWriteNumber(calcView.getText().toString())) {
+            setText("4");
+        }
     }
 
     public void buttonFiveAction(View view) {
-        setText("5");
+        if (canWriteNumber(calcView.getText().toString())) {
+            setText("5");
+        }
     }
 
     public void buttonSixAction(View view) {
-        setText("6");
+        if (canWriteNumber(calcView.getText().toString())) {
+            setText("6");
+        }
     }
 
     public void buttonSevenAction(View view) {
-        setText("7");
+        if (canWriteNumber(calcView.getText().toString())) {
+            setText("7");
+        }
     }
 
     public void buttonEightAction(View view) {
-        setText("8");
+        if (canWriteNumber(calcView.getText().toString())) {
+            setText("8");
+        }
     }
 
     public void buttonNineAction(View view) {
-        setText("9");
+        if (canWriteNumber(calcView.getText().toString())) {
+            setText("9");
+        }
     }
 
     public void buttonNaughtAction(View view) {
-        setText("0");
+        if (canWriteNumber(calcView.getText().toString())) {
+            setText("0");
+        }
     }
 
     public void buttonDotAction(View view) {
-        setText(".");
+        if (canWriteDot(calcView.getText().toString())) {
+            setText(".");
+        }
     }
 
     public void buttonPlusAction(View view) {
-        setText("+");
+        if (canWriteOperation(calcView.getText().toString())) {
+            setText("+");
+        }
     }
 
     public void buttonMinusAction(View view) {
-        setText("-");
+        if (canWriteOperation(calcView.getText().toString())) {
+            setText("-");
+        }
     }
 
     public void buttonMultiplyAction(View view) {
-        setText("*");
+        if (canWriteOperation(calcView.getText().toString())) {
+            setText("*");
+        }
     }
 
     public void buttonDivideAction(View view) {
-        setText("/");
+        if (canWriteOperation(calcView.getText().toString())) {
+            setText("/");
+        }
     }
 
     public void buttonSINAction(View view) {
-        setText("sin (");
+        if (canWriteFunction(calcView.getText().toString())) {
+            setText("sin (");
+        }
     }
 
     public void buttonCOSAction(View view) {
-        setText("cos (");
+        if (canWriteFunction(calcView.getText().toString())) {
+            setText("cos (");
+        }
     }
 
     public void buttonTANAction(View view) {
-        setText("tan (");
+        if (canWriteFunction(calcView.getText().toString())) {
+            setText("tan (");
+        }
     }
 
     public void buttonLOGAction(View view) {
-        setText("log (");
+        if (canWriteFunction(calcView.getText().toString())) {
+            setText("log (");
+        }
     }
 
     public void buttonLNAction(View view) {
-        setText("ln (");
+        if (canWriteFunction(calcView.getText().toString())) {
+            setText("ln (");
+        }
     }
 
     public void buttonLeftBracketAction(View view) {
-        setText("(");
+        if (canWriteFunction(calcView.getText().toString())) {
+            setText("(");
+        }
     }
 
     public void buttonRightBracketAction(View view) {
-        setText(")");
+        if (canWriteOnlyAfterNumber(calcView.getText().toString())) {
+            setText(")");
+        }
     }
 
     public void buttonFactorialAction(View view) {
-        setText("!");
+        if (canWriteOnlyAfterNumber(calcView.getText().toString())) {
+            setText("!");
+        }
     }
 
     public void buttonPercentAction(View view) {
-        setText("%");
+        if (canWriteOnlyAfterNumber(calcView.getText().toString())) {
+            setText("%");
+        }
     }
 
     public void buttonOppositeNumberAction(View view) {
-        calcView.setText("1 / ( " + calcView.getText().toString() + " )");
+        if (canWriteOnlyAfterNumber(calcView.getText().toString())) {
+            calcView.setText("1 / ( " + calcView.getText().toString() + " )");
+        }
     }
 
     public void buttonSignChangeAction(View view) {
-        calcView.setText("- 1 * ( " + calcView.getText().toString() + " )");
+        if (canWriteOnlyAfterNumber(calcView.getText().toString())) {
+            calcView.setText("( " + calcView.getText().toString() + " ) * -1");
+        }
     }
 
     public void buttonPowerAction(View view) {
-        setText("^");
+        if (canWriteOperation(calcView.getText().toString())) {
+            setText("^");
+        }
     }
 
     public void buttonRootAction(View view) {
-        setText("sqr (");
+        if (canWriteFunction(calcView.getText().toString())) {
+            setText("sqrt (");
+        }
     }
 
     public void buttonCleanAction(View view) {
-        calcView.setText("0");
+        calcView.setText(" 0 ");
     }
 
     public void buttonBackAction(View view) {
         if (calcView.getText().length() <= 1) {
-            calcView.setText("0");
+            calcView.setText(" 0 ");
         } else {
             calcView.setText(calcView.getText().toString().substring(0, calcView.getText().length() - 1));
+            if (calcView.getText().toString().charAt(calcView.getText().toString().length() - 1) == ' ') {
+                calcView.setText(calcView.getText().toString().substring(0, calcView.getText().length() - 1));
+            }
         }
     }
 
     public void buttonResultAction(View view) {
-        ReversePolishNotation polishNotation = new ReversePolishNotation();
-        calcView.setText(polishNotation.countRPN(polishNotation.stringToRPN(calcView.getText().toString())));
+        try {
+            calcView.setText(polishNotation.countRPN(polishNotation.stringToRPN(calcView.getText().toString())));
+        } catch (Exception e) {
+            calcView.setText("Error");
+        }
     }
 
+    private boolean canWriteNumber(String text) {
+        return !text.matches(".*[\\)!%]+");
+    }
+
+    private boolean canWriteFunction(String text) {
+        return text.matches(".*[\\+\\-\\*/\\^]+") | messages.contains(calcView.getText().toString());
+    }
+
+    private boolean canWriteDot(String text) {
+        return text.matches(".*[0-9]+");
+    }
+
+    private boolean canWriteOperation(String text) {
+        return text.matches(".*[0-9\\)!%]+") & !messages.contains(calcView.getText().toString());
+    }
+
+    private boolean canWriteOnlyAfterNumber(String text) {
+        return text.matches(".*[0-9\\)!%]+");
+    }
 }

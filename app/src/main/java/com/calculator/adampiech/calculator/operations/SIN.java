@@ -7,6 +7,6 @@ public class SIN implements Operation {
 
     @Override
     public double count(double... args) {
-        return Math.sin(args[0]);
+        return Math.sin(Math.toRadians(args[0]));
     }
 }

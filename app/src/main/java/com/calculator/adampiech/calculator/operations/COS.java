@@ -7,6 +7,6 @@ public class COS implements Operation {
 
     @Override
     public double count(double... args) {
-        return Math.cos(args[0]);
+        return Math.cos(Math.toRadians(args[0]));
     }
 }

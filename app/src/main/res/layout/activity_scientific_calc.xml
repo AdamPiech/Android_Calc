@@ -25,7 +25,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="0"
+            android:text=" 0 "
             android:textSize="36dp"
             android:id="@+id/calcView"
             android:layout_alignParentBottom="true"
@@ -202,7 +202,7 @@
                 android:id="@+id/buttonOppositeNumber"
                 android:onClick="buttonOppositeNumberAction"
                 android:layout_row="2"
-                android:layout_column="5"
+                android:layout_column="4"
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1" />
 
@@ -262,7 +262,7 @@
                 android:id="@+id/buttonSignChange"
                 android:onClick="buttonSignChangeAction"
                 android:layout_row="3"
-                android:layout_column="5"
+                android:layout_column="4"
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1" />
 
@@ -322,7 +322,7 @@
                 android:id="@+id/buttonPercent"
                 android:onClick="buttonPercentAction"
                 android:layout_row="4"
-                android:layout_column="5"
+                android:layout_column="4"
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1" />
 
@@ -382,7 +382,7 @@
                 android:id="@+id/buttonResult"
                 android:onClick="buttonResultAction"
                 android:layout_row="5"
-                android:layout_column="5"
+                android:layout_column="4"
                 android:layout_columnWeight="1"
                 android:layout_gravity="fill_vertical"
                 android:layout_rowSpan="2"

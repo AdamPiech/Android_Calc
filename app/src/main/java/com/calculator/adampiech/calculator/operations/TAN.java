@@ -7,6 +7,6 @@ public class TAN implements Operation {
 
     @Override
     public double count(double... args) {
-        return Math.tan(args[0]);
+        return Math.tan(Math.toRadians(args[0]));
     }
 }

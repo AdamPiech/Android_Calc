@@ -2,6 +2,7 @@ package com.calculator.adampiech.calculator;
 
 import android.util.Log;
 
+import java.text.DecimalFormat;
 import java.util.Map;
 import java.util.Stack;
 
@@ -11,10 +12,12 @@ import java.util.Stack;
 public class ReversePolishNotation {
 
     private Map<String, OperationArguments> operations;
+    private DecimalFormat nuberFormat = new DecimalFormat("#.##");
 
     public ReversePolishNotation() {
         OperationExecutor executor = new OperationExecutor();
         this.operations = executor.getOperations();
+        this.nuberFormat = new DecimalFormat("#.#####");
     }
 
     public String stringToRPN(String text) {
@@ -51,7 +54,7 @@ public class ReversePolishNotation {
 
     public String countRPN(String text) {
 
-        Stack<Double> stack = new Stack<Double>();
+        Stack<Double> stack = new Stack<>();
         String[] sings = text.split(" ");
 
         for (String sing : sings) {
@@ -69,7 +72,7 @@ public class ReversePolishNotation {
                 }
             }
         }
-        return stack.pop().toString().trim().replace(".0", "");
+        return nuberFormat.format(stack.pop()).toString().trim().replace(".0", "");
     }
 
 
@@ -80,11 +83,13 @@ public class ReversePolishNotation {
             case "tan":
             case "log":
             case "ln":
+                return 6;
             case "!":
             case "%":
+                return 5;
+            case "sqrt":
                 return 4;
             case "^":
-            case "sqrt":
                 return 3;
             case "*":
             case "/":
