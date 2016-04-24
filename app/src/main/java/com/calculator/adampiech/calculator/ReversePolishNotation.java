@@ -12,7 +12,7 @@ import java.util.Stack;
 public class ReversePolishNotation {
 
     private Map<String, OperationArguments> operations;
-    private DecimalFormat nuberFormat = new DecimalFormat("#.##");
+    private DecimalFormat nuberFormat;
 
     public ReversePolishNotation() {
         OperationExecutor executor = new OperationExecutor();
@@ -72,7 +72,7 @@ public class ReversePolishNotation {
                 }
             }
         }
-        return nuberFormat.format(stack.pop()).toString().trim().replace(".0", "");
+        return createResult(stack.pop());
     }
 
 
@@ -102,4 +102,11 @@ public class ReversePolishNotation {
         }
     }
 
+    private String createResult(double text) {
+        String result = nuberFormat.format(text).toString().trim();
+        if (result.matches(".*\\.{1}0{1}")) {
+            result.replace(".0", "");
+        }
+        return result;
+    }
 }

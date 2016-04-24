@@ -28,23 +28,18 @@
             android:text=" 0 "
             android:textSize="36dp"
             android:id="@+id/calcView"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_gravity="center_horizontal"
             android:gravity="right"
             android:layout_weight="0"
             android:singleLine="true"
             android:ellipsize="marquee"
             android:marqueeRepeatLimit ="marquee_forever"
-            android:contextClickable="true"
             android:focusable="true"
             android:focusableInTouchMode="true"
-            android:scrollHorizontally="true"
-            android:textAppearance="?android:attr/textAppearanceLarge"/>
+            android:scrollHorizontally="true" />
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="10dp"
+            android:layout_height="15dp"
             android:layout_gravity="center_horizontal"
             android:layout_weight="0" />
 
@@ -53,10 +48,8 @@
             android:layout_height="match_parent"
             android:columnCount="6"
             android:rowCount="7"
-            android:layout_gravity="top|left|bottom|center|right"
             android:useDefaultMargins="true"
             android:layout_weight="0">
-
 
             <Button
                 style="?android:attr/buttonStyleSmall"

@@ -28,19 +28,14 @@
             android:text=" 0 "
             android:textSize="36dp"
             android:id="@+id/calcView"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_gravity="center_horizontal"
             android:gravity="right"
             android:layout_weight="0"
             android:singleLine="true"
             android:ellipsize="marquee"
             android:marqueeRepeatLimit ="marquee_forever"
-            android:contextClickable="true"
             android:focusable="true"
             android:focusableInTouchMode="true"
-            android:scrollHorizontally="true"
-            android:textAppearance="?android:attr/textAppearanceLarge"/>
+            android:scrollHorizontally="true" />
 
         <Space
             android:layout_width="match_parent"

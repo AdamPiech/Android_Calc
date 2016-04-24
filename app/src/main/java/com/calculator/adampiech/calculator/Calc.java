@@ -1,6 +1,7 @@
 package com.calculator.adampiech.calculator;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
 import java.util.HashSet;
 import java.util.Set;
@@ -19,7 +21,8 @@ public class Calc extends Activity {
 
     private ReversePolishNotation polishNotation;
     private Set<String> messages;
-    private boolean dotFlag = true;
+    private boolean dotFlag = false;
+    private String tempView = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,14 +42,17 @@ public class Calc extends Activity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
+        tempView = calcView.getText().toString();
         if (id == R.id.action_basic_calc) {
             setContentView(R.layout.activity_basic_calc);
             calcView = (TextView)findViewById(R.id.calcView);
+            calcView.setText(tempView);
             return true;
         }
         if (id == R.id.action_scientific_calc) {
             setContentView(R.layout.activity_scientific_calc);
             calcView = (TextView)findViewById(R.id.calcView);
+            calcView.setText(tempView);
             return true;
         }
         if (id == R.id.action_about) {
@@ -65,6 +71,7 @@ public class Calc extends Activity {
         messages.add(" 0 ");
         messages.add("Infinity");
         messages.add("Error");
+        messages.add(DecimalFormatSymbols.getInstance().getInfinity().toString());
         return messages;
     }
 
