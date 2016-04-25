@@ -107,6 +107,9 @@ public class ReversePolishNotation {
         if (result.matches(".*\\.{1}0{1}")) {
             result.replace(".0", "");
         }
-        return result;
+        if (result.matches(".*,{1}0{1}")) {
+            result.replace(",0", "");
+        }
+        return result.replace(",", ".");
     }
 }

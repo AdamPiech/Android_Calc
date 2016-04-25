@@ -21,7 +21,7 @@ public class Calc extends Activity {
 
     private ReversePolishNotation polishNotation;
     private Set<String> messages;
-    private boolean dotFlag = false;
+    private boolean dotFlag = true;
     private String tempView = "";
 
     @Override
@@ -68,7 +68,7 @@ public class Calc extends Activity {
 
     private Set<String> createMessage() {
         Set<String> messages = new HashSet<>();
-        messages.add(" 0 ");
+        messages.add("0");
         messages.add("Infinity");
         messages.add("Error");
         messages.add(DecimalFormatSymbols.getInstance().getInfinity().toString());
@@ -86,7 +86,7 @@ public class Calc extends Activity {
                 calcView.setText(calcView.getText().toString() + text);
             }
         }
-        if (".".equals(text)) {
+        if (".".equals(text) || "0,".equals(text)) {
             dotFlag = false;
         }
         if (!text.matches("[0-9\\.]+")) {
@@ -155,8 +155,12 @@ public class Calc extends Activity {
     }
 
     public void buttonDotAction(View view) {
-        if (canWriteDot(calcView.getText().toString())) {
-            setText(".");
+        if (messages.contains(calcView.getText().toString())) {
+            setText("0.");
+        } else {
+            if (canWriteDot(calcView.getText().toString())) {
+                setText(".");
+            }
         }
     }
 
@@ -240,7 +244,7 @@ public class Calc extends Activity {
 
     public void buttonOppositeNumberAction(View view) {
         if (canWriteOnlyAfterNumber(calcView.getText().toString())) {
-            calcView.setText("1 / ( " + calcView.getText().toString() + " )");
+            calcView.setText("1 / ( " + calcView.getText().toString().trim() + " )");
         }
     }
 
@@ -263,12 +267,12 @@ public class Calc extends Activity {
     }
 
     public void buttonCleanAction(View view) {
-        calcView.setText(" 0 ");
+        calcView.setText("0");
     }
 
     public void buttonBackAction(View view) {
         if (calcView.getText().length() <= 1) {
-            calcView.setText(" 0 ");
+            calcView.setText("0");
         } else {
             calcView.setText(calcView.getText().toString().substring(0, calcView.getText().length() - 1));
             if (calcView.getText().toString().charAt(calcView.getText().toString().length() - 1) == ' ') {
